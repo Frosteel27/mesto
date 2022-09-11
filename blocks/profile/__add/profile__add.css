@@ -1,0 +1,12 @@
+.profile__add {
+    justify-self: end;
+    padding: 0;
+    background-color: transparent;
+    border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+}

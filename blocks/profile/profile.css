@@ -1,0 +1,8 @@
+.profile {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, max-content) auto;
+    justify-items: start;
+    align-items: center;
+    padding: 40px 0 0;
+}

@@ -1,0 +1,7 @@
+.profile__title {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    align-items: center;
+    margin-left: 30px;
+    gap: 16px 18px;
+}
