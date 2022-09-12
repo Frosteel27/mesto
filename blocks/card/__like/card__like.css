@@ -1,0 +1,22 @@
+.card__like {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+    width: max-content;
+    height: max-content;
+    justify-self: end;
+    align-self: center;
+    transition: all .2s ease-in-out;
+}
+
+.card__like::before {
+    content: url(../../../images/like-active.svg);
+    position: absolute;
+    display: none;
+}
+
+.card__like:hover {
+    opacity: .6;
+}
