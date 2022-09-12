@@ -12,4 +12,4 @@
 * Небольшой скрипт, написанный на JS
 * Оптимизация картинок
 
-[GitHub-Pages]()
+[GitHub-Pages](https://frosteel27.github.io/mesto/)
