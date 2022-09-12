@@ -3,9 +3,21 @@
     box-sizing: border-box;
     width: 81%;
     background-color: #000;
-    margin: 45px auto 25px;
+    margin: 48px auto 37px;
     padding: 14px 0;
     color: #fff;
     outline: 0;
     border: 0;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.popup__submit:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width:767px) {
+    .popup__submit {
+        margin-bottom: 25px;
+    }
 }
