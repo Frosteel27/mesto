@@ -19,42 +19,42 @@
                 <img src="./images/Avatar.jpg" alt="Кусто Жак-Ив" class="profile__avatar">
                 <div class="profile__title">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button class="profile__edit"><img src="./images/change.svg" alt="Редактировать" class="profile__edit-ico"></button>
+                    <button aria-label="edit" class="profile__edit"><img src="./images/change.svg" alt="Редактировать" class="profile__edit-ico"></button>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button class="profile__add"><img src="./images/add.svg" alt="Добавить"></button>
+                <button aria-label="add" class="profile__add"><img src="./images/add.svg" alt="Добавить"></button>
             </section>
             <section class="gallery">
                 <ul class="gallery__grid">
                     <li class="card">
                         <img src="./images/karachaevsk-1.jpg" alt="Карачаево-Чекесск" class="card__image">
                         <h2 class="card__caption">Карачаевск</h2>
-                        <button type="button" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
+                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
                     </li>
                     <li class="card">
                         <img src="./images/gora-elbrus-1.jpg" alt="Гора Эльбрус" class="card__image">
                         <h2 class="card__caption">Гора Эльбрус</h2>
-                        <button type="button" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
+                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
                     </li>
                     <li class="card">
                         <img src="./images/dombai-1.jpg" alt="Домбай" class="card__image">
                         <h2 class="card__caption">Домбай</h2>
-                        <button type="button" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
+                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
                     </li>
                     <li class="card">
                         <img src="./images/gora-elbrus-1.jpg" alt="Гора Эльбрус" class="card__image">
                         <h2 class="card__caption">Гора Эльбрус</h2>
-                        <button type="button" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
+                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
                     </li>
                     <li class="card">
                         <img src="./images/dombai-1.jpg" alt="Домбай" class="card__image">
                         <h2 class="card__caption">Домбай</h2>
-                        <button type="button" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
+                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
                     </li>
                     <li class="card">
                         <img src="./images/karachaevsk-1.jpg" alt="Карачаевск" class="card__image">
                         <h2 class="card__caption">Карачаево-Чекесск</h2>
-                        <button type="button" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
+                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
                     </li>
                 </ul>
             </section>
@@ -64,13 +64,15 @@
         </footer>
     </div>
     <div class="popup popup_hidden">
-        <form class="popup__form">
+        <div class="popup__container">
             <button type="button" class="popup__close"></button>
-            <h2 class="popup__heading">Редактировать профиль</h2>
-            <input type="text" name="login" class="popup__input">
-            <input type="text" name="job" class="popup__input">
-            <button type="submit" value="Сохранить" class="popup__submit">Сохранить</button>
-        </form>
+            <form name="edit-profile" class="popup__form"> 
+                <h2 class="popup__heading">Редактировать профиль</h2>
+                <input type="text" name="login" placeholder="Имя" required class="popup__input">
+                <input type="text" name="job" placeholder="Чем занимаетесь?" required class="popup__input">
+                <button type="submit" value="Сохранить" class="popup__submit">Сохранить</button>
+            </form>
+        </div>
     </div>
     <script src="./scripts/index.js"></script>
 </body>
