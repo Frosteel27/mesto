@@ -7,21 +7,23 @@ let newJob = document.querySelector('.popup__input[name=job]');
 let formSubmit = document.querySelector('.popup__form');
 let closeButton = document.querySelector('.popup__close');
 
-newName.textContent = profileName.textContent
-
-function togglePopup() {
-    popup.classList.toggle('popup_hidden');
+function openPopup() {
+    popup.classList.remove('popup_hidden');
     newName.value = profileName.textContent;
     newJob.value = profileJob.textContent;
+}
+
+function closePopup() {
+    popup.classList.add('popup_hidden')
 }
 
 function savePopup(evt) {
     evt.preventDefault();
     profileName.textContent = newName.value;
     profileJob.textContent = newJob.value;
-    togglePopup();
+    closePopup();
 }
 
-editButton.addEventListener('click', togglePopup);
-closeButton.addEventListener('click', togglePopup);
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
 formSubmit.addEventListener('submit', savePopup)
