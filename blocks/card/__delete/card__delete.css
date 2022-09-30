@@ -2,4 +2,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
+    outline: 0;
+    border: 0;
+    background: 0;
 }
