@@ -49,9 +49,10 @@ const initialCards = [
   function addCard(name, link) {
     const currentCard = cardTemplate.content.cloneNode(true);
     const currentCardName = currentCard.querySelector('.card__caption');
-    const currentCardLink = currentCard.querySelector('.card__image');
+    const currentCardImage = currentCard.querySelector('.card__image');
     currentCardName.textContent = name;
-    currentCardLink.src = link;
+    currentCardImage.src = link;
+    currentCardImage.alt = name;
     return currentCard;
   }
 
