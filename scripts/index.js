@@ -6,7 +6,10 @@ const profileJob = document.querySelector('.profile__job');
 const editButton = document.querySelector('.profile__edit');
 const newName = document.querySelector('.popup__input[name=login]');
 const newJob = document.querySelector('.popup__input[name=job]');
-const formSubmit = document.querySelector('.popup__form');
+const imageName = document.querySelector('.popup__input[name=postname]');
+const imageSrc = document.querySelector('.popup__input[name=postsrc]');
+const formSubmitProfile = profilePopup.querySelector('.popup__form');
+const formSubmitUpload = uploadPopup.querySelector('.popup__form');
 const closeButton = document.querySelectorAll('.popup__close');
 const uploadButton = document.querySelector('.profile__add');
 const cardTemplate = document.querySelector('.card-template');
@@ -56,6 +59,15 @@ const initialCards = [
     return currentCard;
   }
 
+  function uploadCard(evt) {
+    evt.preventDefault();
+    const card = addCard(imageName.value, imageSrc.value);
+    gallery.prepend(card);
+    imageName.value = '';
+    imageSrc.value = '';
+    evt.target.closest('.popup').classList.add('popup_hidden');
+  }
+
 function openPopup(evt) {
     console.log(evt.target)
     if (evt.currentTarget == editButton) {
@@ -76,11 +88,12 @@ function savePopup(evt) {
     evt.preventDefault();
     profileName.textContent = newName.value;
     profileJob.textContent = newJob.value;
-    closePopup();
+    evt.target.closest('.popup').classList.add('popup_hidden');
 }
 
 editButton.addEventListener('click', openPopup);
-formSubmit.addEventListener('submit', savePopup);
+formSubmitProfile.addEventListener('submit', savePopup);
+formSubmitUpload.addEventListener('submit', uploadCard);
 uploadButton.addEventListener('click', openPopup);
 closeButton.forEach(x => {
     x.addEventListener('click', closePopup)    
