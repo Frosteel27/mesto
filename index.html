@@ -63,7 +63,7 @@
             <p class="footer__copyright">&copy; 2022 Евгений Женченко</p>
         </footer>
     </div>
-    <div class="popup popup_hidden">
+    <div class="popup popup_type_profile popup_hidden">
         <div class="popup__container">
             <button type="button" class="popup__close"></button>
             <form name="edit-profile" class="popup__form"> 
@@ -71,6 +71,17 @@
                 <input type="text" name="login" placeholder="Имя" required class="popup__input">
                 <input type="text" name="job" placeholder="Чем занимаетесь?" required class="popup__input">
                 <button type="submit" value="Сохранить" class="popup__submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup popup_type_upload popup_hidden">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <form name="upload" class="popup__form">
+                <h2 class="popup__heading">Новое место</h2>
+                <input type="text" name="postname" placeholder="Название" class="popup__input" required>
+                <input type="text" name="postsrc" placeholder="Ссылка на картинку" class="popup__input" required>
+                <button type="submit" value="Создать" class="popup__submit">Создать</button>
             </form>
         </div>
     </div>
