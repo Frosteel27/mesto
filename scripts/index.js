@@ -1,4 +1,3 @@
-const popup = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.popup_type_profile');
 const uploadPopup = document.querySelector('.popup_type_upload');
 const profileName = document.querySelector('.profile__name');
@@ -14,6 +13,9 @@ const closeButton = document.querySelectorAll('.popup__close');
 const uploadButton = document.querySelector('.profile__add');
 const cardTemplate = document.querySelector('.card-template');
 const gallery = document.querySelector('.gallery__grid');
+const galleryPopup = document.querySelector('.popup_type_enlarge');
+const popupImage = galleryPopup.querySelector('.popup__enlarge-image');
+const popupCaption = galleryPopup.querySelector('.popup__enlarge-caption');
 
 const initialCards = [
     {
@@ -56,6 +58,28 @@ const initialCards = [
     currentCardName.textContent = name;
     currentCardImage.src = link;
     currentCardImage.alt = name;
+
+    const deleteButton = currentCard.querySelector('.card__delete');
+    deleteButton.addEventListener('click', evt => {evt.target.closest('.card').remove();});
+
+    function handleEnlargePopup() {
+      popupImage.src = link;
+      popupCaption.textContent = name;
+      galleryPopup.classList.remove('popup_hidden');
+    }
+
+    const buttonEnlarge = currentCard.querySelector('.card__image');
+    buttonEnlarge.addEventListener('click', handleEnlargePopup);
+
+
+    function handleLike() {
+      likeButton.classList.toggle('card__like_active')
+    }
+
+    const likeButton = currentCard.querySelector('.card__like');
+    likeButton.addEventListener('click', handleLike);
+
+
     return currentCard;
   }
 
@@ -63,13 +87,10 @@ const initialCards = [
     evt.preventDefault();
     const card = addCard(imageName.value, imageSrc.value);
     gallery.prepend(card);
-    imageName.value = '';
-    imageSrc.value = '';
-    evt.target.closest('.popup').classList.add('popup_hidden');
+    closePopup(evt);
   }
 
 function openPopup(evt) {
-    console.log(evt.target)
     if (evt.currentTarget == editButton) {
         profilePopup.classList.remove('popup_hidden');
         newName.value = profileName.textContent;
@@ -77,6 +98,8 @@ function openPopup(evt) {
     }
     if (evt.currentTarget == uploadButton) {
         uploadPopup.classList.remove('popup_hidden');
+        imageName.value = '';
+        imageSrc.value = '';
     }
 }
 
@@ -88,7 +111,6 @@ function savePopup(evt) {
     evt.preventDefault();
     profileName.textContent = newName.value;
     profileJob.textContent = newJob.value;
-    evt.target.closest('.popup').classList.add('popup_hidden');
 }
 
 editButton.addEventListener('click', openPopup);
