@@ -26,7 +26,7 @@
             </section>
             <section class="gallery">
                 <ul class="gallery__grid">
-                    <li class="card">
+                    <!-- <li class="card">
                         <img src="./images/karachaevsk-1.jpg" alt="Карачаево-Чекесск" class="card__image">
                         <h2 class="card__caption">Карачаевск</h2>
                         <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
@@ -55,7 +55,7 @@
                         <img src="./images/karachaevsk-1.jpg" alt="Карачаевск" class="card__image">
                         <h2 class="card__caption">Карачаево-Чекесск</h2>
                         <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li>
+                    </li> -->
                 </ul>
             </section>
         </main>
@@ -63,10 +63,10 @@
             <p class="footer__copyright">&copy; 2022 Евгений Женченко</p>
         </footer>
     </div>
-    <div class="popup popup_hidden">
+    <div class="popup popup_type_profile popup_hidden">
         <div class="popup__container">
             <button type="button" class="popup__close"></button>
-            <form name="edit-profile" class="popup__form"> 
+            <form name="edit-profile" class="popup__form popup__form_type_profile"> 
                 <h2 class="popup__heading">Редактировать профиль</h2>
                 <input type="text" name="login" placeholder="Имя" required class="popup__input">
                 <input type="text" name="job" placeholder="Чем занимаетесь?" required class="popup__input">
@@ -74,6 +74,33 @@
             </form>
         </div>
     </div>
+    <div class="popup popup_type_upload popup_hidden">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <form name="popup__form popup__form_type_upload" class="popup__form">
+                <h2 class="popup__heading">Новое место</h2>
+                <input type="text" name="postname" placeholder="Название" class="popup__input" required>
+                <input type="text" name="postsrc" placeholder="Ссылка на картинку" class="popup__input" required>
+                <button type="submit" value="Создать" class="popup__submit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup popup_type_enlarge popup_hidden">
+        <div class="popup__enlarge-container">
+            <button type="button" class="popup__close"></button>
+            <img src="" alt="" class="popup__enlarge-image">
+            <h2 class="popup__enlarge-caption"></h2>
+        </div>
+    </div>
+
+    <template class="card-template">
+        <li class="card">
+            <img src="" alt="" class="card__image">
+            <h2 class="card__caption"></h2>
+            <button type="button" aria-label="like" class="card__like"></button>
+            <button class="card__delete"><img src="./images/delete.svg" alt="Удалить"></button>
+        </li>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
