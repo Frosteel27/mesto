@@ -9,14 +9,11 @@
     justify-self: end;
     align-self: center;
     transition: all .2s ease-in-out;
-}
-
-.card__like::before {
-    content: url(../../../images/like-active.svg);
-    position: absolute;
-    display: none;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/like__disabled.svg);
 }
 
 .card__like:hover {
-    opacity: .6;
+    opacity: .5;
 }
