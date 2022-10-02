@@ -64,6 +64,12 @@ const popupCaption = popupGallery.querySelector('.popup__enlarge-caption');
     closePopup(evt);
   }
 
+function openProfilePopup(popupCurrent) {
+  openPopup(popupCurrent);
+  newName.value = profileName.textContent; 
+  newJob.value = profileJob.textContent;
+}
+
 function openPopup(popupCurrent) {
     popupCurrent.classList.remove('popup_hidden')
 }
@@ -79,7 +85,7 @@ function savePopup(evt) {
     closePopup(evt);
 }
 
-buttonEdit.addEventListener('click', () => {openPopup(popupProfile)});
+buttonEdit.addEventListener('click', () => {openProfilePopup(popupProfile)});
 formSubmitProfile.addEventListener('submit', savePopup);
 formSubmitUpload.addEventListener('submit', uploadCard);
 buttonUpload.addEventListener('click', () => {openPopup(popupUpload)});
