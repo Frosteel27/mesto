@@ -46,8 +46,8 @@ const popupCaption = popupGallery.querySelector('.popup__enlarge-caption');
     const buttonEnlarge = cardCurrent.querySelector('.card__image');
     buttonEnlarge.addEventListener('click', handleEnlargePopup);
 
-    const likeButton = cardCurrent.querySelector('.card__like');
-    likeButton.addEventListener('click', () => {likeButton.classList.toggle('card__like_active')});
+    const buttonLike = cardCurrent.querySelector('.card__like');
+    buttonLike.addEventListener('click', () => {buttonLike.classList.toggle('card__like_active')});
 
 
     return cardCurrent;
