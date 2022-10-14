@@ -68,8 +68,14 @@
             <button type="button" class="popup__close"></button>
             <form name="edit-profile" class="popup__form popup__form_type_profile"> 
                 <h2 class="popup__heading">Редактировать профиль</h2>
-                <input type="text" name="login" placeholder="Имя" required class="popup__input">
-                <input type="text" name="job" placeholder="Чем занимаетесь?" required class="popup__input">
+                <label class="popup__formfield">
+                    <input id="name-input" type="text" name="name" placeholder="Имя" required minlength="2" maxlength="40" class="popup__input">
+                <span class="name-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__formfield">
+                    <input id="job-input"type="text" name="job" placeholder="Чем занимаетесь?" required minlength="2" maxlength="200" class="popup__input">
+                <span class="job-input-error popup__input-error"></span>
+                </label>                
                 <button type="submit" value="Сохранить" class="popup__submit">Сохранить</button>
             </form>
         </div>
@@ -79,8 +85,14 @@
             <button type="button" class="popup__close"></button>
             <form name="popup__form popup__form_type_upload" class="popup__form">
                 <h2 class="popup__heading">Новое место</h2>
-                <input type="text" name="postname" placeholder="Название" class="popup__input" required>
-                <input type="text" name="postsrc" placeholder="Ссылка на картинку" class="popup__input" required>
+                <label class="popup__formfield">
+                    <input id="postname-input" type="text" name="postname" placeholder="Название" class="popup__input" required minlength="2" maxlength="30">
+                    <span class="postname-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__formfield">
+                    <input id="postsrc-input" type="url" name="postsrc" placeholder="Ссылка на картинку" class="popup__input" required>
+                    <span class="postsrc-input-error popup__input-error"></span>
+                </label>                
                 <button type="submit" value="Создать" class="popup__submit">Создать</button>
             </form>
         </div>
@@ -101,7 +113,9 @@
             <button class="card__delete"><img src="./images/delete.svg" alt="Удалить"></button>
         </li>
     </template>
+    
     <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 </html>
