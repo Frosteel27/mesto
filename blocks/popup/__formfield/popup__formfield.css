@@ -1,0 +1,7 @@
+.popup__formfield {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 81%;
+    padding: 0;
+}

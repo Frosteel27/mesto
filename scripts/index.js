@@ -1,9 +1,10 @@
+const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupUpload = document.querySelector('.popup_type_upload');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const buttonEdit = document.querySelector('.profile__edit');
-const newName = document.querySelector('.popup__input[name=login]');
+const newName = document.querySelector('.popup__input[name=name]');
 const newJob = document.querySelector('.popup__input[name=job]');
 const imageName = document.querySelector('.popup__input[name=postname]');
 const imageSrc = document.querySelector('.popup__input[name=postsrc]');
@@ -61,30 +62,57 @@ const popupCaption = popupGallery.querySelector('.popup__enlarge-caption');
     }
     const card = addCard(cardData);
     gallery.prepend(card);
-    closePopup(evt);
+    closePopup(evt.target.closest('.popup'));
+    evt.target.reset();
   }
 
-function openPopup(popupCurrent) {
-    popupCurrent.classList.remove('popup_hidden')
+function openProfilePopup(popupCurrent) {
+  openPopup(popupCurrent);
+  newName.value = profileName.textContent; 
+  newJob.value = profileJob.textContent;
 }
 
-function closePopup(evt) {
-    evt.target.closest('.popup').classList.add('popup_hidden');
+function openUploadPopup(popupCurrent) {
+  openPopup(popupCurrent);
+  imageName.value = '';
+  imageSrc.value = '';
+}
+
+function openPopup(popupCurrent) {
+    popupCurrent.classList.remove('popup_hidden');
+    document.addEventListener('keydown', function handle(evt) {
+      if(evt.key === 'Escape') {
+        closePopup(popupCurrent);
+        document.removeEventListener('keydown', handle)
+      }
+    });
+}
+
+function closePopup(popupCurrent) {
+    popupCurrent.classList.add('popup_hidden');
 }
 
 function savePopup(evt) {
     evt.preventDefault();
     profileName.textContent = newName.value;
     profileJob.textContent = newJob.value;
-    closePopup(evt);
+    closePopup(evt.target.closest('.popup'));
 }
 
-buttonEdit.addEventListener('click', () => {openPopup(popupProfile)});
+buttonEdit.addEventListener('click', () => {openProfilePopup(popupProfile)});
 formSubmitProfile.addEventListener('submit', savePopup);
 formSubmitUpload.addEventListener('submit', uploadCard);
-buttonUpload.addEventListener('click', () => {openPopup(popupUpload)});
+buttonUpload.addEventListener('click', () => {openUploadPopup(popupUpload)});
 buttonClose.forEach(x => {
-    x.addEventListener('click', closePopup)    
+    x.addEventListener('click', (evt) => closePopup(evt.target.closest('.popup')))    
 });
+
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if(evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  })
+})
 
 render();
