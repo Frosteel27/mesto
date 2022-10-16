@@ -26,36 +26,6 @@
             </section>
             <section class="gallery">
                 <ul class="gallery__grid">
-                    <!-- <li class="card">
-                        <img src="./images/karachaevsk-1.jpg" alt="Карачаево-Чекесск" class="card__image">
-                        <h2 class="card__caption">Карачаевск</h2>
-                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li>
-                    <li class="card">
-                        <img src="./images/gora-elbrus-1.jpg" alt="Гора Эльбрус" class="card__image">
-                        <h2 class="card__caption">Гора Эльбрус</h2>
-                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li>
-                    <li class="card">
-                        <img src="./images/dombai-1.jpg" alt="Домбай" class="card__image">
-                        <h2 class="card__caption">Домбай</h2>
-                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li>
-                    <li class="card">
-                        <img src="./images/gora-elbrus-1.jpg" alt="Гора Эльбрус" class="card__image">
-                        <h2 class="card__caption">Гора Эльбрус</h2>
-                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li>
-                    <li class="card">
-                        <img src="./images/dombai-1.jpg" alt="Домбай" class="card__image">
-                        <h2 class="card__caption">Домбай</h2>
-                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li>
-                    <li class="card">
-                        <img src="./images/karachaevsk-1.jpg" alt="Карачаевск" class="card__image">
-                        <h2 class="card__caption">Карачаево-Чекесск</h2>
-                        <button type="button" aria-label="like" class="card__like"><img src="./images/like__disabled.svg" alt="Лайк"></button>
-                    </li> -->
                 </ul>
             </section>
         </main>
@@ -68,8 +38,14 @@
             <button type="button" class="popup__close"></button>
             <form name="edit-profile" class="popup__form popup__form_type_profile"> 
                 <h2 class="popup__heading">Редактировать профиль</h2>
-                <input type="text" name="login" placeholder="Имя" required class="popup__input">
-                <input type="text" name="job" placeholder="Чем занимаетесь?" required class="popup__input">
+                <label class="popup__formfield">
+                    <input id="name-input" type="text" name="name" placeholder="Имя" required minlength="2" maxlength="40" class="popup__input">
+                <span class="name-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__formfield">
+                    <input id="job-input"type="text" name="job" placeholder="Чем занимаетесь?" required minlength="2" maxlength="200" class="popup__input">
+                <span class="job-input-error popup__input-error"></span>
+                </label>                
                 <button type="submit" value="Сохранить" class="popup__submit">Сохранить</button>
             </form>
         </div>
@@ -77,10 +53,16 @@
     <div class="popup popup_type_upload popup_hidden">
         <div class="popup__container">
             <button type="button" class="popup__close"></button>
-            <form name="popup__form popup__form_type_upload" class="popup__form">
+            <form name="upload" class="popup__form popup__form_type_upload">
                 <h2 class="popup__heading">Новое место</h2>
-                <input type="text" name="postname" placeholder="Название" class="popup__input" required>
-                <input type="text" name="postsrc" placeholder="Ссылка на картинку" class="popup__input" required>
+                <label class="popup__formfield">
+                    <input id="postname-input" type="text" name="postname" placeholder="Название" class="popup__input" required minlength="2" maxlength="30">
+                    <span class="postname-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__formfield">
+                    <input id="postsrc-input" type="url" name="postsrc" placeholder="Ссылка на картинку" class="popup__input" required>
+                    <span class="postsrc-input-error popup__input-error"></span>
+                </label>                
                 <button type="submit" value="Создать" class="popup__submit">Создать</button>
             </form>
         </div>
@@ -101,7 +83,9 @@
             <button class="card__delete"><img src="./images/delete.svg" alt="Удалить"></button>
         </li>
     </template>
+    
     <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
 </body>
 </html>
