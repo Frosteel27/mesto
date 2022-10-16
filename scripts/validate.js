@@ -14,7 +14,7 @@ function hideInputError(formElement, inputElement, formObject) {
 
 function hasInvalidInput(inputList) {
     return inputList.some((input) => {
-        return !input.validity.valid;
+        return !input.checkValidity();
       })
 }
 
@@ -24,10 +24,11 @@ function toggleButton(inputList, inputSubmitButton, formObject) {
     } else {
         inputSubmitButton.classList.remove(formObject.inactiveButtonClass)
     }
+    inputSubmitButton.disabled = hasInvalidInput(inputList);
 }
 
 function checkValidity(formElement, inputElement, formObject) {
-    if (!inputElement.validity.valid) {
+    if (!inputElement.checkValidity()) {
         showInputError(formElement, inputElement, inputElement.validationMessage, formObject);
     } else {
         hideInputError(formElement, inputElement, formObject);

@@ -2,7 +2,9 @@
     color: #FF0000;
     font-size: 12px;
     line-height: 1.25;
-    position: absolute;
     visibility: hidden;
-    padding-top: 5px;
+    display: block;
+    padding: 5px 0 0;
+    min-height: 35px;
+    box-sizing: border-box;
 }

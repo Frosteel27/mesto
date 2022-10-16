@@ -1,3 +1,4 @@
+const popupList = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupUpload = document.querySelector('.popup_type_upload');
 const profileName = document.querySelector('.profile__name');
@@ -71,11 +72,16 @@ function openProfilePopup(popupCurrent) {
   newJob.value = profileJob.textContent;
 }
 
+function openUploadPopup(popupCurrent) {
+  openPopup(popupCurrent);
+  imageName.value = '';
+  imageSrc.value = '';
+}
+
 function openPopup(popupCurrent) {
     popupCurrent.classList.remove('popup_hidden');
     document.addEventListener('keydown', function handle(evt) {
       if(evt.key === 'Escape') {
-        console.log(1)
         closePopup(popupCurrent);
         document.removeEventListener('keydown', handle)
       }
@@ -96,10 +102,17 @@ function savePopup(evt) {
 buttonEdit.addEventListener('click', () => {openProfilePopup(popupProfile)});
 formSubmitProfile.addEventListener('submit', savePopup);
 formSubmitUpload.addEventListener('submit', uploadCard);
-buttonUpload.addEventListener('click', () => {openPopup(popupUpload)});
+buttonUpload.addEventListener('click', () => {openUploadPopup(popupUpload)});
 buttonClose.forEach(x => {
     x.addEventListener('click', (evt) => closePopup(evt.target.closest('.popup')))    
 });
 
-render();
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if(evt.target === evt.currentTarget) {
+      closePopup(popup);
+    }
+  })
+})
 
+render();
