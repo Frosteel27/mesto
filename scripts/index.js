@@ -19,6 +19,7 @@ const popupImage = popupGallery.querySelector('.popup__enlarge-image');
 const popupCaption = popupGallery.querySelector('.popup__enlarge-caption');
 
 
+
   function render() {
     initialCards.forEach((item) => {
         const cardCurrent = addCard(item);
@@ -41,7 +42,7 @@ const popupCaption = popupGallery.querySelector('.popup__enlarge-caption');
       popupImage.src = cardData.link;
       popupImage.alt = cardData.name;
       popupCaption.textContent = cardData.name;
-      popupGallery.classList.remove('popup_hidden');
+      openPopup(popupGallery);
     }
 
     const buttonEnlarge = cardCurrent.querySelector('.card__image');
@@ -63,7 +64,8 @@ const popupCaption = popupGallery.querySelector('.popup__enlarge-caption');
     const card = addCard(cardData);
     gallery.prepend(card);
     closePopup(evt.target.closest('.popup'));
-    evt.target.reset();
+    formSubmitUpload.reset();
+    toggleButton(formSubmitUpload);
   }
 
 function openProfilePopup(popupCurrent) {
@@ -74,22 +76,24 @@ function openProfilePopup(popupCurrent) {
 
 function openUploadPopup(popupCurrent) {
   openPopup(popupCurrent);
-  imageName.value = '';
-  imageSrc.value = '';
 }
 
+function handleEscKey(evt) {
+    if(evt.key === 'Escape') {
+      const popupOpened = document.querySelector('.popup_opened')
+      closePopup(popupOpened);
+    }
+  }
+
+
 function openPopup(popupCurrent) {
-    popupCurrent.classList.remove('popup_hidden');
-    document.addEventListener('keydown', function handle(evt) {
-      if(evt.key === 'Escape') {
-        closePopup(popupCurrent);
-        document.removeEventListener('keydown', handle)
-      }
-    });
+    popupCurrent.classList.add('popup_opened');
+    document.addEventListener('keydown', handleEscKey)
 }
 
 function closePopup(popupCurrent) {
-    popupCurrent.classList.add('popup_hidden');
+    popupCurrent.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handleEscKey)
 }
 
 function savePopup(evt) {
