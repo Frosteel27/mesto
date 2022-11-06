@@ -1,11 +1,12 @@
-class Card {
+import { handleEscKey } from "./index.js";
+
+export class Card {
     static _template = document.querySelector('.card-template');
     static _gallery = document.querySelector('.gallery__grid');
     static _popup = document.querySelector('.popup_type_enlarge');
 
-    constructor(imageName, imageSrc) {
-        this._imageName = imageName;
-        this._imageSrc = imageSrc;
+    constructor(cardData) {
+        this._cardData = cardData
     }
 
     _handleDelete = (evt) => {
@@ -17,9 +18,9 @@ class Card {
     }
 
     _handlePopup = () => {
-        Card._popup.querySelector('.popup__enlarge-image').src = this._imageSrc;
-        Card._popup.querySelector('.popup__enlarge-image').alt = this._imageName;
-        Card._popup.querySelector('.popup__enlarge-caption').textContent = this._imageName
+        Card._popup.querySelector('.popup__enlarge-image').src = this._cardData.link;
+        Card._popup.querySelector('.popup__enlarge-image').alt = this._cardData.name;
+        Card._popup.querySelector('.popup__enlarge-caption').textContent = this._cardData.name
         Card._popup.classList.add('popup_opened');
         document.addEventListener('keydown', handleEscKey);
     }
@@ -32,20 +33,18 @@ class Card {
         card.querySelector('.card__image').addEventListener('click', this._handlePopup)
     }
 
-    _createCard = (name, src) => {
-        this._card = Card._template.content.cloneNode(true);
-        this._cardImage = this._card.querySelector('.card__image');
+    _createCard = () => {
+        const card = Card._template.content.cloneNode(true);
+        card.querySelector('.card__caption').textContent = this._cardData.name;
+        card.querySelector('.card__image').src = this._cardData.link;
+        card.querySelector('.card__image').alt = this._cardData.name;
 
-        this._card.querySelector('.card__caption').textContent = name;
-        this._cardImage.src = src;
-        this._cardImage.alt = name;
+        this._setEventListeners(card);
 
-        this._setEventListeners(this._card);
-
-        return this._card;
+        return card;
     }
 
     render = () => {
-        Card._gallery.append(this._createCard(this._imageName, this._imageSrc));
+        Card._gallery.prepend(this._createCard())
     }
 }
