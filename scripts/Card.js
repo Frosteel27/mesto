@@ -1,4 +1,4 @@
-import { openEnlargePopup } from "./index.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 export class Card {
     static _template = document.querySelector('.card-template');
@@ -21,7 +21,7 @@ export class Card {
 
         card.querySelector('.card__like').addEventListener('click', evt => this._handleLike(evt))
 
-        card.querySelector('.card__image').addEventListener('click', () => openEnlargePopup(this._cardData))
+        card.querySelector('.card__image').addEventListener('click', () => {const popup = new PopupWithImage(this._cardData, '.popup_type_enlarge').open()})
     }
 
     createCard = () => {

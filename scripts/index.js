@@ -1,7 +1,9 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import Section from "./Section.js";
-import { initialCards, formObject } from "./constants.js"
+import { initialCards, formObject } from "./constants.js";
+import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 
 const popupList = document.querySelectorAll('.popup');
@@ -20,59 +22,69 @@ const buttonUpload = document.querySelector('.profile__add');
 const gallery = document.querySelector('.gallery__grid');
 const popupEnlarge = document.querySelector('.popup_type_enlarge');
 
-function handleOpenProfilePopup() {
-  openPopup(popupProfile);
-  newName.value = profileName.textContent; 
-  newJob.value = profileJob.textContent;
+const handleProfilePopup = (form) => {
+
 }
 
-function handleOpenUploadPopup() {
-  openPopup(popupUpload);
+const handleUploadPopup = (form) => {
+
 }
 
-export function openEnlargePopup(cardData) {
-  popupEnlarge.querySelector('.popup__enlarge-image').src = cardData.link;
-  popupEnlarge.querySelector('.popup__enlarge-image').alt = cardData.name;
-  popupEnlarge.querySelector('.popup__enlarge-caption').textContent = cardData.name
-  openPopup(popupEnlarge);
-}
-
-function handleEscKey(evt) {
-    if(evt.key === 'Escape') {
-      const popupOpened = document.querySelector('.popup_opened')
-      closePopup(popupOpened);
-    }
-  }
 
 
-function openPopup(popupCurrent) {
-    popupCurrent.classList.add('popup_opened');
-    document.addEventListener('keydown', handleEscKey)
-}
+// function handleOpenProfilePopup() {
+//   openPopup(popupProfile);
+//   newName.value = profileName.textContent; 
+//   newJob.value = profileJob.textContent;
+// }
 
-function closePopup(popupCurrent) {
-    popupCurrent.classList.remove('popup_opened');
-    document.removeEventListener('keydown', handleEscKey)
-}
+// function handleOpenUploadPopup() {
+//   openPopup(popupUpload);
+// }
 
-function savePopup(evt) {
-    evt.preventDefault();
-    profileName.textContent = newName.value;
-    profileJob.textContent = newJob.value;
-    closePopup(evt.target.closest('.popup'));
-}
+// export function openEnlargePopup(cardData) {
+//   popupEnlarge.querySelector('.popup__enlarge-image').src = cardData.link;
+//   popupEnlarge.querySelector('.popup__enlarge-image').alt = cardData.name;
+//   popupEnlarge.querySelector('.popup__enlarge-caption').textContent = cardData.name
+//   openPopup(popupEnlarge);
+// }
 
-buttonEdit.addEventListener('click', handleOpenProfilePopup);
-formSubmitProfile.addEventListener('submit', savePopup);
-buttonUpload.addEventListener('click',handleOpenUploadPopup);
+// function handleEscKey(evt) {
+//     if(evt.key === 'Escape') {
+//       const popupOpened = document.querySelector('.popup_opened')
+//       closePopup(popupOpened);
+//     }
+//   }
 
-popupList.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if(evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    }
-  })
-})
+
+// function openPopup(popupCurrent) {
+//     popupCurrent.classList.add('popup_opened');
+//     document.addEventListener('keydown', handleEscKey)
+// }
+
+// function closePopup(popupCurrent) {
+//     popupCurrent.classList.remove('popup_opened');
+//     document.removeEventListener('keydown', handleEscKey)
+// }
+
+// function savePopup(evt) {
+//     evt.preventDefault();
+//     profileName.textContent = newName.value;
+//     profileJob.textContent = newJob.value;
+//     closePopup(evt.target.closest('.popup'));
+// }
+
+// buttonEdit.addEventListener('click', handleOpenProfilePopup);
+// formSubmitProfile.addEventListener('submit', savePopup);
+// buttonUpload.addEventListener('click',handleOpenUploadPopup);
+
+// popupList.forEach((popup) => {
+//   popup.addEventListener('mousedown', (evt) => {
+//     if(evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) {
+//       closePopup(popup);
+//     }
+//   })
+// })
 
 const defaultCards = new Section({items: initialCards, renderer:  (item) => {
   const assembledCard = new Card(item).createCard();
@@ -115,4 +127,4 @@ document.querySelectorAll(formObject.formSelector).forEach(formElement => {
 
 defaultCards.render();
 
-export {handleEscKey, gallery, popupEnlarge, openPopup}
+// export {handleEscKey, gallery, popupEnlarge, openPopup}
