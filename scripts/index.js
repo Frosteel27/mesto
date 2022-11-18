@@ -1,5 +1,6 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import Section from "./Section.js";
 import { initialCards, formObject } from "./constants.js"
 
 
@@ -73,29 +74,45 @@ popupList.forEach((popup) => {
   })
 })
 
-function renderCard(card) {
-  gallery.prepend(card);
-}
+const defaultCards = new Section({items: initialCards, renderer:  (item) => {
+  const assembledCard = new Card(item).createCard();
+  defaultCards.addItem(assembledCard);
+}}, '.gallery__grid');
 
 function uploadCard(evt) {
   evt.preventDefault();
-  renderCard(new Card({
+  const assembledCard = new Card({
     name : imageName.value,
     link : imageSrc.value
-  }).createCard())
-  closePopup(evt.target.closest('.popup'));
-  formSubmitUpload.reset();
-  new FormValidator(formSubmitUpload, formObject).enableValidation();
-}
+  }).createCard();
+  defaultCards.addItem(assembledCard)
+};
+
+// function renderCard(card) {
+//   gallery.prepend(card);
+// }
+
+// function uploadCard(evt) {
+//   evt.preventDefault();
+//   renderCard(new Card({
+//     name : imageName.value,
+//     link : imageSrc.value
+//   }).createCard())
+//   closePopup(evt.target.closest('.popup'));
+//   formSubmitUpload.reset();
+//   new FormValidator(formSubmitUpload, formObject).enableValidation();
+// }
 
 formSubmitUpload.addEventListener('submit', uploadCard);
 
-initialCards.forEach((item) => {  
-  renderCard(new Card(item).createCard())
-})
+// initialCards.forEach((item) => {  
+//   renderCard(new Card(item).createCard())
+// })
 
 document.querySelectorAll(formObject.formSelector).forEach(formElement => {
   new FormValidator(formElement, formObject).enableValidation();
 })
+
+defaultCards.render();
 
 export {handleEscKey, gallery, popupEnlarge, openPopup}
