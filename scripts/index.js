@@ -4,6 +4,7 @@ import Section from "./Section.js";
 import { initialCards, formObject } from "./constants.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
 
 const popupList = document.querySelectorAll('.popup');
@@ -22,15 +23,43 @@ const buttonUpload = document.querySelector('.profile__add');
 const gallery = document.querySelector('.gallery__grid');
 const popupEnlarge = document.querySelector('.popup_type_enlarge');
 
-const handleProfilePopup = (form) => {
 
+const handleProfilePopup = ([name, job]) => {
+  new UserInfo({nameSelector:'.profile__name', jobSelector: '.profile__job'}).setUserInfo(name, job);
 }
 
-const handleUploadPopup = (form) => {
-
+const handleEnlargePopup = (cardData, selector) => {
+  new PopupWithImage(cardData, selector).open();
+  new PopupWithImage(cardData, selector).setEventListeners();
 }
 
 
+
+// const handleUploadPopup = (form, {name, link}) => {
+//   form.addEventListener('submit', (name, link) => (evt) => {
+//     evt.preventDefault();
+//     const assembledCard = new Card({name, link}).createCard();
+//     defaultCards.addItem(assembledCard);
+//   })
+// }
+
+const handleUploadPopup = ([name, link]) => {
+  const assembledCard = new Card({name, link}).createCard();
+  defaultCards.addItem(assembledCard);
+}
+
+new PopupWithForm(handleUploadPopup, '.popup_type_upload').setEventListeners();
+buttonUpload.addEventListener('click', () => {
+  new PopupWithForm(handleUploadPopup, '.popup_type_upload').open();
+});
+
+new PopupWithForm(handleProfilePopup, '.popup_type_profile').setEventListeners();
+buttonEdit.addEventListener('click', () => {
+  new PopupWithForm(handleProfilePopup, '.popup_type_profile').open();
+  let newData = new UserInfo({nameSelector:'.profile__name', jobSelector: '.profile__job'}).getUserInfo();
+  newName.value = newData.name;
+  newJob.value = newData.job;
+});
 
 // function handleOpenProfilePopup() {
 //   openPopup(popupProfile);
@@ -76,7 +105,7 @@ const handleUploadPopup = (form) => {
 
 // buttonEdit.addEventListener('click', handleOpenProfilePopup);
 // formSubmitProfile.addEventListener('submit', savePopup);
-// buttonUpload.addEventListener('click',handleOpenUploadPopup);
+
 
 // popupList.forEach((popup) => {
 //   popup.addEventListener('mousedown', (evt) => {
@@ -87,18 +116,17 @@ const handleUploadPopup = (form) => {
 // })
 
 const defaultCards = new Section({items: initialCards, renderer:  (item) => {
-  const assembledCard = new Card(item).createCard();
+  const assembledCard = new Card(item, handleEnlargePopup).createCard();
   defaultCards.addItem(assembledCard);
 }}, '.gallery__grid');
 
-function uploadCard(evt) {
-  evt.preventDefault();
-  const assembledCard = new Card({
-    name : imageName.value,
-    link : imageSrc.value
-  }).createCard();
-  defaultCards.addItem(assembledCard)
-};
+// function uploadCard() {
+//   const assembledCard = new Card({
+//     name : imageName.value,
+//     link : imageSrc.value
+//   }).createCard();
+//   defaultCards.addItem(assembledCard)
+// };
 
 // function renderCard(card) {
 //   gallery.prepend(card);
@@ -115,7 +143,7 @@ function uploadCard(evt) {
 //   new FormValidator(formSubmitUpload, formObject).enableValidation();
 // }
 
-formSubmitUpload.addEventListener('submit', uploadCard);
+// formSubmitUpload.addEventListener('submit', uploadCard);
 
 // initialCards.forEach((item) => {  
 //   renderCard(new Card(item).createCard())

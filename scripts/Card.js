@@ -3,8 +3,9 @@ import PopupWithImage from "./PopupWithImage.js";
 export class Card {
     static _template = document.querySelector('.card-template');
 
-    constructor(cardData) {
+    constructor(cardData, handlePopup) {
         this._cardData = cardData
+        this._handlePopup = handlePopup;
     }
 
     _handleDelete = (evt) => {
@@ -21,7 +22,7 @@ export class Card {
 
         card.querySelector('.card__like').addEventListener('click', evt => this._handleLike(evt))
 
-        card.querySelector('.card__image').addEventListener('click', () => {const popup = new PopupWithImage(this._cardData, '.popup_type_enlarge').open()})
+        card.querySelector('.card__image').addEventListener('click', () => this._handlePopup(this._cardData, '.popup_type_enlarge'))
     }
 
     createCard = () => {
