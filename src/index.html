@@ -7,22 +7,22 @@
     <meta name="author" content="Евгений Женченко">
     <meta name="description" content="У нас есть Жак-Ив Кусто идругие имена">
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
 </head>
 <body class="root">
     <div class="content">
         <header class="header">
-            <img src="./images/logo.svg" alt="Место" class="header__logo">
+            <img src="<%=require('./images/logo.svg')%>" alt="Место" class="header__logo">
         </header>
         <main class="main">
             <section class="profile">
-                <img src="./images/Avatar.jpg" alt="Кусто Жак-Ив" class="profile__avatar">
+                <img src="<%=require('./images/Avatar.jpg')%>" alt="Кусто Жак-Ив" class="profile__avatar">
                 <div class="profile__title">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button aria-label="edit" class="profile__edit"><img src="./images/change.svg" alt="Редактировать" class="profile__edit-ico"></button>
+                    <button aria-label="edit" class="profile__edit"><img src="<%=require('./images/change.svg')%>" alt="Редактировать" class="profile__edit-ico"></button>
                     <p class="profile__job">Исследователь океана</p>
                 </div>
-                <button aria-label="add" class="profile__add"><img src="./images/add.svg" alt="Добавить"></button>
+                <button aria-label="add" class="profile__add"><img src="<%=require('./images/add.svg')%>" alt="Добавить"></button>
             </section>
             <section class="gallery">
                 <ul class="gallery__grid">
@@ -70,20 +70,20 @@
     <div class="popup popup_type_enlarge">
         <div class="popup__enlarge-container">
             <button type="button" class="popup__close"></button>
-            <img src="./images/969117.jpg" alt="" class="popup__enlarge-image">
+            <img src="<%=require('./images/969117.jpg')%>" alt="" class="popup__enlarge-image">
             <h2 class="popup__enlarge-caption"></h2>
         </div>
     </div>
 
     <template class="card-template">
         <li class="card">
-            <img src="./images/969117.jpg" alt="" class="card__image">
+            <img src="<%=require('./images/969117.jpg')%>" alt="" class="card__image">
             <h2 class="card__caption"></h2>
             <button type="button" aria-label="like" class="card__like"></button>
-            <button class="card__delete"><img src="./images/delete.svg" alt="Удалить"></button>
+            <button class="card__delete"><img src="<%=require('./images/delete.svg')%>" alt="Удалить"></button>
         </li>
     </template>
     
-    <script type="module" src="./scripts/index.js"></script>
+    <!-- <script type="module" src="./scripts/pages/index.js"></script> -->
 </body>
 </html>
