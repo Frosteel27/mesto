@@ -7,40 +7,58 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import './index.css'
 
-const handleProfilePopup = ([name, job]) => {
-  new UserInfo({nameSelector:'.profile__name', jobSelector: '.profile__job'}).setUserInfo(name, job);
+const userInfo = new UserInfo({nameSelector:'.profile__name', jobSelector: '.profile__job'})
+const handleProfilePopup = ({name, job}) => {
+  userInfo.setUserInfo(name, job);
 }
 
-const handleEnlargePopup = (cardData, selector) => {
-  new PopupWithImage(cardData, selector).open();
-  new PopupWithImage(cardData, selector).setEventListeners();
+const popupEnlarge = new PopupWithImage('.popup_type_enlarge');
+popupEnlarge.setEventListeners();
+const handleEnlargePopup = (cardData) => {
+  popupEnlarge.open(cardData);
+  
 }
 
-const handleUploadPopup = ([name, link]) => {
-  const assembledCard = new Card({name, link}, handleEnlargePopup).createCard();
+const assembleCard = ({name, link}) => {
+  return new Card({name, link}, handleEnlargePopup, '.card-template').createCard()
+}
+
+const handleUploadPopup = (object) => {
+  const assembledCard = assembleCard(object)
   defaultCards.addItem(assembledCard);
 }
 
-new PopupWithForm(handleUploadPopup, '.popup_type_upload').setEventListeners();
+
+const popupUpload = new PopupWithForm(handleUploadPopup, '.popup_type_upload');
+popupUpload.setEventListeners();
 buttonUpload.addEventListener('click', () => {
-  new PopupWithForm(handleUploadPopup, '.popup_type_upload').open();
+  popupUpload.open();
+  validatorUpload.enableValidation();
 });
 
-new PopupWithForm(handleProfilePopup, '.popup_type_profile').setEventListeners();
+const popupProfile = new PopupWithForm(handleProfilePopup, '.popup_type_profile');
+popupProfile.setEventListeners();
 buttonEdit.addEventListener('click', () => {
-  new PopupWithForm(handleProfilePopup, '.popup_type_profile').open();
-  let newData = new UserInfo({nameSelector:'.profile__name', jobSelector: '.profile__job'}).getUserInfo();
+  popupProfile.open();
+  let newData = userInfo.getUserInfo();
   newName.value = newData.name;
   newJob.value = newData.job;
 });
 
 const defaultCards = new Section({items: initialCards, renderer:  (item) => {
-  const assembledCard = new Card(item, handleEnlargePopup).createCard();
+  const assembledCard = assembleCard(item);
   defaultCards.addItem(assembledCard);
 }}, '.gallery__grid');
 
-document.querySelectorAll(formObject.formSelector).forEach(formElement => {
-  new FormValidator(formElement, formObject).enableValidation();
+// document.querySelectorAll(formObject.formSelector).forEach(formElement => {
+//   new FormValidator(formElement, formObject).enableValidation();
+// })
+
+const [validatorProfile, validatorUpload] = Array.from(document.querySelectorAll(formObject.formSelector)).map(formElement => {
+  return new FormValidator(formElement, formObject);
 })
+
+validatorProfile.enableValidation();
+validatorUpload.enableValidation()
 
 defaultCards.render();
