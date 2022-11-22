@@ -1,16 +1,16 @@
 import Popup from "./Popup.js"
 
 export default class PopupWithImage extends Popup{
-    constructor(cardData, popupSelector){
+    constructor(popupSelector){
         super(popupSelector);
-        this._name = cardData.name;
-        this._link = cardData.link;
+        this._image = this._popup.querySelector('.popup__enlarge-image');
+        this._caption = this._popup.querySelector('.popup__enlarge-caption');
     }
 
-    open() {
+    open(card) {
+        this._image.src = card.link;
+        this._image.alt = card.name;
+        this._caption.textContent = card.name;
         super.open();
-        this._popup.querySelector('.popup__enlarge-image').src = this._link;
-        this._popup.querySelector('.popup__enlarge-image').alt = this._name;
-        this._popup.querySelector('.popup__enlarge-caption').textContent = this._name;
     }
 }

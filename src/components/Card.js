@@ -1,36 +1,39 @@
 export default class Card {
-    static _template = document.querySelector('.card-template');
-
-    constructor(cardData, handlePopup) {
+    constructor(cardData, handlePopup, templateSelector) {
         this._cardData = cardData
         this._handlePopup = handlePopup;
+        this._template = document.querySelector(templateSelector);
     }
 
-    _handleDelete(evt) {
-        evt.target.closest('.card').remove();
+    _handleDelete() {
+        this._element.remove();
+        this._element = null;
     }
 
-    _handleLike(evt) {
-        evt.target.classList.toggle('card__like_active');
+    _handleLike() {
+        this._element.querySelector('.card__like').classList.toggle('card__like_active')
     }
 
 
-    _setEventListeners(card) {
-        card.querySelector('.card__delete').addEventListener('click', evt => this._handleDelete(evt));
+    _setEventListeners() {
+        this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDelete());
 
-        card.querySelector('.card__like').addEventListener('click', evt => this._handleLike(evt))
+        this._element.querySelector('.card__like').addEventListener('click', () => this._handleLike())
 
-        card.querySelector('.card__image').addEventListener('click', () => this._handlePopup(this._cardData, '.popup_type_enlarge'))
+        this._element.querySelector('.card__image').addEventListener('click', () => this._handlePopup(this._cardData))
     }
 
     createCard() {
-        const card = Card._template.content.cloneNode(true);
-        card.querySelector('.card__caption').textContent = this._cardData.name;
-        card.querySelector('.card__image').src = this._cardData.link;
-        card.querySelector('.card__image').alt = this._cardData.name;
+        this._element = this._template.content.querySelector('.card').cloneNode(true);
+        this._caption = this._element.querySelector('.card__caption');
+        this._image = this._element.querySelector('.card__image');
 
-        this._setEventListeners(card);
+        this._caption.textContent = this._cardData.name;
+        this._image.src = this._cardData.link;
+        this._image.alt = this._cardData.name;
 
-        return card;
+        this._setEventListeners();
+
+        return this._element;
     }
 }
