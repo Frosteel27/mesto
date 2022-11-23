@@ -40,7 +40,7 @@ const popupProfile = new PopupWithForm(handleProfilePopup, '.popup_type_profile'
 popupProfile.setEventListeners();
 buttonEdit.addEventListener('click', () => {
   popupProfile.open();
-  let newData = userInfo.getUserInfo();
+  const newData = userInfo.getUserInfo();
   newName.value = newData.name;
   newJob.value = newData.job;
 });
@@ -49,10 +49,6 @@ const defaultCards = new Section({items: initialCards, renderer:  (item) => {
   const assembledCard = assembleCard(item);
   defaultCards.addItem(assembledCard);
 }}, '.gallery__grid');
-
-// document.querySelectorAll(formObject.formSelector).forEach(formElement => {
-//   new FormValidator(formElement, formObject).enableValidation();
-// })
 
 const [validatorProfile, validatorUpload] = Array.from(document.querySelectorAll(formObject.formSelector)).map(formElement => {
   return new FormValidator(formElement, formObject);
