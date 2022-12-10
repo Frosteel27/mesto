@@ -38,4 +38,5 @@ export const buttonEdit = document.querySelector('.profile__edit');
 export const newName = document.querySelector('.popup__input[name=name]');
 export const newJob = document.querySelector('.popup__input[name=job]');
 export const buttonUpload = document.querySelector('.profile__add');
+export const buttonAvatar = document.querySelector('.profile__avatar-container');
 
