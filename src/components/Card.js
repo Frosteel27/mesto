@@ -21,6 +21,9 @@ export default class Card {
         } else {
             this._handleLike();
         }
+    }
+
+    toggleLike() {
         this._btnLike.classList.toggle('card__like-button_active');
     }
 

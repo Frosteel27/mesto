@@ -26,10 +26,14 @@ const api = new Api({
 })
 
 
-const deleteCard = (card) => {
-  console.log(card);
-  api.deleteCard(card);
-  card.delete();
+const deleteCard = async (card) => {
+  try{
+    await api.deleteCard(card);
+    card.delete()
+  } catch(err) {
+    console.log(err)
+  }
+  
   popupConfirmDelete.close();
 }
 
@@ -38,12 +42,16 @@ popupConfirmDelete.setEventListeners()
 
 const userInfo = new UserInfo({nameSelector:'.profile__name', jobSelector: '.profile__job', avatarSelector: '.profile__avatar'})
 const handleProfilePopup = async ({name, job: about}) => {
-  popupProfile.showLoading(true);
-  await api.setUserInfo({name, about});
-  userInfo.setUserInfo({name, about});
-  popupProfile.showLoading(false);
-  popupProfile.close();
-  console.log(about);
+  try {
+    popupProfile.showLoading(true);
+    const res = await api.setUserInfo({name, about});
+    userInfo.setUserInfo(res);
+    popupProfile.close();
+  } catch(err) {
+    console.log(err)
+  } finally {
+    popupProfile.showLoading(false);
+  }
 }
 
 const popupEnlarge = new PopupWithImage('.popup_type_enlarge');
@@ -53,11 +61,16 @@ const handleEnlargePopup = (cardData) => {
 }
 
 const handleAvatarPopup = async ({avatar}) => {
-  document.querySelector('.profile__avatar').src = avatar;
-  popupAvatar.showLoading(true);
-  await api.setUserAvatar(avatar);
-  popupAvatar.showLoading(false);
-  popupAvatar.close();
+  try {
+    popupAvatar.showLoading(true);
+    const res = await api.setUserAvatar(avatar);
+    userInfo.setAvatar(res.avatar);
+    popupAvatar.close();
+  } catch(err) {
+    console.log(err)
+  } finally {
+    popupAvatar.showLoading(false);
+  }  
 }
 
 const popupAvatar = new PopupWithForm(handleAvatarPopup, '.popup_type_avatar')
@@ -74,23 +87,39 @@ const assembleCard = (cardObject) => {
             userId, 
             () => {popupConfirmDelete.open(card)},
             async () => {
-              const res = await api.putLike(card);
-              card.countLikes(res.likes)
+              try{
+                const res = await api.putLike(card);
+                card.countLikes(res.likes);
+                card.toggleLike();
+              } catch(err) {
+                console.log(err)
+              }
+              
             },
             async () => {
-              const res = await api.deleteLike(card)
-              card.countLikes(res.likes)
+              try {
+                const res = await api.deleteLike(card)
+                card.countLikes(res.likes);
+                card.toggleLike();
+              } catch(err) {
+                console.log(err)
+              }              
             }
             );
   return card.createCard()
 }
 
 const handleUploadPopup = async(cardData) => {
-  popupUpload.showLoading(true);
-  const card = await api.uploadCard(cardData);
-  popupUpload.showLoading(false);
-  popupUpload.close();
-  defaultCards.render(card)
+  try {
+    popupUpload.showLoading(true);
+    const card = await api.uploadCard(cardData);
+    popupUpload.close();
+    cardsContainer.render(card)
+  } catch(err) {
+    console.log(err)
+  } finally {
+    popupUpload.showLoading(false);
+  }  
 }
 
 
@@ -110,9 +139,9 @@ buttonEdit.addEventListener('click', () => {
   newJob.value = newData.job;
 });
 
-const defaultCards = new Section((item) => {
+const cardsContainer = new Section((item) => {
   const assembledCard = assembleCard(item);
-  defaultCards.addItem(assembledCard);
+  cardsContainer.addItem(assembledCard);
 }, '.gallery__grid');
 
 const [validatorProfile, validatorUpload, validatorAvatar] = Array.from(document.querySelectorAll(formObject.formSelector)).map(formElement => {
@@ -126,10 +155,12 @@ validatorAvatar.enableValidation();
 Promise.all([api.getInintialCards(), api.getUserInfo()])
   .then(([initialCards, user])=> {
     userInfo.setUserInfo(user);
-    userInfo.setAvatar(user.avatar)
+    userInfo.setAvatar(user.avatar);
     userId = user._id;
-    defaultCards.render(initialCards.reverse());
+    cardsContainer.render(initialCards.reverse());
   })
+  .catch(err => {console.log(err)})
+
 
 
 
