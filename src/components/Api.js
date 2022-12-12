@@ -14,13 +14,13 @@ export default class Api {
 
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {headers: {authorization: this._token}})
-            .then(res => this._processResponse(res))
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 
     getInintialCards() {
         return fetch(`${this._baseUrl}/cards`, {headers: {authorization: this._token}})
-            .then(res => this._processResponse(res))
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 
@@ -34,7 +34,7 @@ export default class Api {
                 about: userInfo.about
             })
         })
-            .then(res => {this._processResponse(res)})
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 
@@ -47,7 +47,7 @@ export default class Api {
                 avatar: avatar
             })
         })
-            .then(res => {this._processResponse(res)})
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 
@@ -61,7 +61,7 @@ export default class Api {
                 link: cardData.link
             })
         })
-            .then(res => this._processResponse(res))
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 
@@ -70,8 +70,6 @@ export default class Api {
             method: 'DELETE',
             headers: {authorization: this._token}
             })
-            .then(res => {this._processResponse(res)})
-            .catch(err => {console.log(err)})
     }
 
     putLike(card) {
@@ -79,7 +77,7 @@ export default class Api {
             method: 'PUT',
             headers: {authorization: this._token}
         })
-            .then(res => this._processResponse(res))
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 
@@ -88,7 +86,7 @@ export default class Api {
             method: 'DELETE',
             headers: {authorization: this._token}
         })
-            .then(res => this._processResponse(res))
+            .then(res => {return this._processResponse(res)})
             .catch(err => {console.log(err)})
     }
 }
