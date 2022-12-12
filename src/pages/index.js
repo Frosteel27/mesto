@@ -29,12 +29,11 @@ const api = new Api({
 const deleteCard = async (card) => {
   try{
     await api.deleteCard(card);
-    card.delete()
+    card.delete();
+    popupConfirmDelete.close();
   } catch(err) {
     console.log(err)
-  }
-  
-  popupConfirmDelete.close();
+  }  
 }
 
 const popupConfirmDelete = new PopupWithConfirmation(deleteCard, '.popup_type_confirm')
