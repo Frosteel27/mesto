@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Frosteel27/mesto/issues"
   },
-  "homepage": "https://github.com/Frosteel27/mesto#readme",
+  "homepage": "https://frosteel27.github.io/mesto/",
   "devDependencies": {
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
